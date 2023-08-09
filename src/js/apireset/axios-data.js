@@ -1,14 +1,31 @@
 // import axios, { isCancel, AxiosError } from 'axios';
 import axios from 'axios';
-export async function axiosData({ header, parameters, data }) {
+export async function axiosData({
+  header,
+  parameters,
+  data,
+  auth,
+  authorization,
+  authorizationHeaders,
+}) {
   try {
     const response = await axios(
       {
         ...header,
+        defaults: {
+          headers: {
+            common: { Authorization: authorization },
+            post: { Authorization: authorization },
+          },
+        },
+        headers: {
+          Authorization: authorizationHeaders,
+        },
         params: {
           ...parameters,
         },
         data: { ...data },
+        auth: { ...auth },
       },
       { signal: AbortSignal.timeout(5000) }
     );

@@ -16,6 +16,8 @@ import {
   localStorageAdd,
 } from 'js/locallibrary/locallibrary';
 
+import { axiosData } from 'js/apireset/axios-data';
+
 export const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
@@ -46,6 +48,34 @@ export const ContactForm = () => {
     }
     dispatch(createContact({ name: name, number: number }));
     evt.target.reset();
+  };
+
+  const handleApi = async evt => {
+    console.log('get user current');
+    const header = {
+      method: 'get',
+      accept: 'application/json',
+      baseURL: 'https://connections-api.herokuapp.com/users/current',
+    };
+
+    const authorization =
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQzZDNmNzJjOTEyZDAwMTQ5ZGMyZjAiLCJpYXQiOjE2OTE2MDQ1ODl9.7I-S4bVIRuIpmj38yHbtk0b22sJF2UVW933E-BXy9IA';
+
+    const authorizationHeaders =
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQzZDNmNzJjOTEyZDAwMTQ5ZGMyZjAiLCJpYXQiOjE2OTE2MDQ1ODl9.7I-S4bVIRuIpmj38yHbtk0b22sJF2UVW933E-BXy9IA';
+
+    const auth = {
+      email: 'across@terdtsail.com',
+      password: 'examplepwd12345',
+    };
+
+    const response = await axiosData({
+      header: header,
+      authorization: authorization,
+      auth: auth,
+      authorizationHeaders: authorizationHeaders,
+    });
+    console.log(response);
   };
 
   // const handleAddContact = evt => {
@@ -126,6 +156,7 @@ export const ContactForm = () => {
         />
       </label>
       <Button label="Add contact" formButton={true} />
+      <Button label="Api" formButton={false} action={handleApi} />
     </form>
   );
 };
