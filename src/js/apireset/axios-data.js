@@ -12,20 +12,10 @@ export async function axiosData({
     const response = await axios(
       {
         ...header,
-        defaults: {
-          headers: {
-            common: { Authorization: authorization },
-            post: { Authorization: authorization },
-          },
-        },
-        headers: {
-          Authorization: authorizationHeaders,
-        },
         params: {
           ...parameters,
         },
         data: { ...data },
-        auth: { ...auth },
       },
       { signal: AbortSignal.timeout(5000) }
     );
@@ -34,3 +24,22 @@ export async function axiosData({
     return error;
   }
 }
+
+// const response = await axios(
+// {
+//   ...header,
+//   defaults: {
+//     headers: {
+//       common: { Authorization: authorization },
+//       post: { Authorization: authorization },
+//     },
+//   },
+//   headers: {
+//     Authorization: authorizationHeaders,
+//   },
+//   params: {
+//     ...parameters,
+//   },
+//   data: { ...data },
+//   auth: { ...auth },
+// }
