@@ -51,6 +51,15 @@ export const App = () => {
   );
 };
 
+// Komponenty:
+// logowanie
+// rejestracja
+// konto uzytkownika
+// Nawigacja
+
+// Strony:
+// Glowna
+
 // Książka kontaktów
 // Dodaj w aplikacji "Książka kontaktów" możliwość rejestracji, logowania i aktualizacji użytkownika, a także pracy z prywatnym zbiorem kontaktów.
 
