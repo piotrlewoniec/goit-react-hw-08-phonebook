@@ -3,9 +3,14 @@ import css from './ContactList.module.css';
 import { Button } from '../button/Button';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { selectFilter, selectServerContacts } from 'redux/selectors';
+import { selectFilter, selectContacts } from 'redux/selectors';
+import { deleteContact } from 'redux/contacts/contactsslice';
 
-import { removeContact } from 'redux/contacts/operations';
+import {
+  localStorageGetStatus,
+  localStorageRemove,
+} from 'js/locallibrary/locallibrary';
+import Notiflix from 'notiflix';
 
 const ContactListItem = ({ contact, action }) => (
   <li className={css.item}>
@@ -22,22 +27,30 @@ const ContactListItem = ({ contact, action }) => (
 export const ContactList = () => {
   const dispatch = useDispatch();
   const filter = useSelector(selectFilter);
+  const contacts = useSelector(selectContacts);
 
-  const serverContacts = useSelector(selectServerContacts);
+  const localStorageLibraryName = 'contacts';
 
   const handledeleteContact = evt => {
     evt.preventDefault();
     const id = evt.target.dataset.id;
-    dispatch(removeContact(id));
+
+    const element = localStorageGetStatus(localStorageLibraryName, id, 'id'); // libraryName, element, keySearch
+    if (element !== undefined) {
+      localStorageRemove(localStorageLibraryName, id, 'id');
+    } else {
+      Notiflix.Notify.info('Contact does not exists in localstorage');
+    }
+    dispatch(deleteContact(id));
   };
 
-  if (serverContacts.length === 0) {
+  if (contacts.length === 0) {
     return <p className={css.info}>Contacts list empty</p>;
   } else {
     if (filter === '') {
       return (
         <ul className={css.holder}>
-          {serverContacts.map((contact, index) => (
+          {contacts.map((contact, index) => (
             <ContactListItem
               key={'id' + index} //{contact.id}
               contact={contact}
@@ -47,7 +60,7 @@ export const ContactList = () => {
         </ul>
       );
     } else {
-      const filteredContacts = serverContacts.filter(contact =>
+      const filteredContacts = contacts.filter(contact =>
         contact.name.toLowerCase().includes(filter.toLowerCase())
       );
       return (
@@ -56,7 +69,7 @@ export const ContactList = () => {
             <ContactListItem
               key={'id' + index} //{contact.id}
               contact={contact}
-              action={handledeleteContact}
+              action={deleteContact}
             />
           ))}
         </ul>

@@ -2,7 +2,7 @@
 import css from './Filter.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectFilter } from 'redux/selectors';
-import { setFilter } from 'redux/searchfilterslice';
+import { setFilter } from 'redux/filter/searchfilterslice';
 
 export const Filter = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,8 @@ export const Filter = () => {
   };
 
   return (
-    <>
+    <div className={css.filter_wrapper}>
+      <h2 className={css.filter_subtitle}>Contacts filter</h2>
       <p className={css.info}>Find contacts by name</p>
       <input
         className={css.inputfield}
@@ -21,7 +22,7 @@ export const Filter = () => {
         value={filter}
         onChange={changeFilter}
       />
-    </>
+    </div>
   );
 };
 

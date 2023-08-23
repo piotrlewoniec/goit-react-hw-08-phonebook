@@ -1,13 +1,6 @@
 // import axios, { isCancel, AxiosError } from 'axios';
 import axios from 'axios';
-export async function axiosData({
-  header,
-  parameters,
-  data,
-  auth,
-  authorization,
-  authorizationHeaders,
-}) {
+export async function axiosData({ header, parameters, data }) {
   try {
     const response = await axios(
       {
@@ -24,22 +17,3 @@ export async function axiosData({
     return error;
   }
 }
-
-// const response = await axios(
-// {
-//   ...header,
-//   defaults: {
-//     headers: {
-//       common: { Authorization: authorization },
-//       post: { Authorization: authorization },
-//     },
-//   },
-//   headers: {
-//     Authorization: authorizationHeaders,
-//   },
-//   params: {
-//     ...parameters,
-//   },
-//   data: { ...data },
-//   auth: { ...auth },
-// }

@@ -5,48 +5,32 @@ import { ContactForm } from './contactform/ContactForm';
 import { Filter } from './filter/Filter';
 import { ContactList } from './contactlist/ContactList';
 import { Loader } from './loader/Loader';
-import { localStorageLoad } from '../js/system/localstorage';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts, selectServerData } from 'redux/selectors';
-import { addContact } from 'redux/contactsslice';
-import { getContacts } from 'redux/operations';
+import { selectServerData } from 'redux/selectors';
+import { getContacts } from 'redux/contacts/operations';
 
 export const App = () => {
-  const localStorageLibraryName = 'contacts';
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
-  const { data, isLoading, error } = useSelector(selectServerData);
+  const { isLoading, error } = useSelector(selectServerData);
 
   useEffect(() => {
-    // if (localStorageLibraryName in localStorage) {
-    //   const libraryLocal = localStorageLoad(localStorageLibraryName);
-    //   for (let element of libraryLocal) {
-    //     dispatch(addContact(element));
-    //   }
-
-    // }
     dispatch(getContacts());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // useEffect(() => {
-  //   console.log(contacts);
-  // }, [contacts]);
-
-  // useEffect(() => {
-  //   console.log(data);
-  // }, [data]);
-
   return (
-    <div className={css.app_holder}>
-      <h1 className={css.app_title}>Phonebook</h1>
-      <ContactForm />
-      <h2 className={css.app_subtitle}>Contacts</h2>
-      <Filter />
-      <ContactList />
-      {isLoading && <Loader name="RotatingLines" />}
-      {error && <p>Communication error. {error}</p>}
+    <div className={css.app_wrapper}>
+      <div className={css.app_holder}>
+        <h1 className={css.app_title}>Phonebook</h1>
+        <ContactList />
+        {isLoading && <Loader name="RotatingLines" />}
+        {error && <p>Communication error. {error}</p>}
+      </div>
+      <div className={css.app_actionpanel}>
+        <Filter />
+        <ContactForm />
+      </div>
     </div>
   );
 };
@@ -61,11 +45,8 @@ export const App = () => {
 // Glowna
 
 // Książka kontaktów
-// Dodaj w aplikacji "Książka kontaktów" możliwość rejestracji, logowania i aktualizacji użytkownika, a także pracy z prywatnym zbiorem kontaktów.
 
 // Back-end
-// Do tego zadania istnieje gotowy back-end. Zapoznaj się z dokumentacją. Wspiera wszystkie niezbędne operacje z listy kontaktów oraz rejestrację, logowanie i aktualizację użytkownika przy pomocy JWT. Wykorzystaj go zamiast twojego back-endu utworzonego przez serwis mockapi.io.
-// https://connections-api.herokuapp.com/docs/
 
 // Trasowanie
 // Dodaj trasowanie z biblioteką React Router. W aplikacji powinno być kilka stron:
