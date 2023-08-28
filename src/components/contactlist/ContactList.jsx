@@ -36,30 +36,36 @@ export const ContactList = () => {
   } else {
     if (filter === '') {
       return (
-        <ul className={css.holder}>
-          {serverContacts.map((contact, index) => (
-            <ContactListItem
-              key={'id' + index} //{contact.id}
-              contact={contact}
-              action={handledeleteContact}
-            />
-          ))}
-        </ul>
+        <div className={css.wrapper}>
+          <h1 className={css.title}>Phonebook</h1>
+          <ul className={css.holder}>
+            {serverContacts.map((contact, index) => (
+              <ContactListItem
+                key={'id' + index} //{contact.id}
+                contact={contact}
+                action={handledeleteContact}
+              />
+            ))}
+          </ul>
+        </div>
       );
     } else {
       const filteredContacts = serverContacts.filter(contact =>
         contact.name.toLowerCase().includes(filter.toLowerCase())
       );
       return (
-        <ul className={css.holder}>
-          {filteredContacts.map((contact, index) => (
-            <ContactListItem
-              key={'id' + index} //{contact.id}
-              contact={contact}
-              action={handledeleteContact}
-            />
-          ))}
-        </ul>
+        <div className={css.wrapper}>
+          <h1 className={css.app_title}>Phonebook</h1>
+          <ul className={css.holder}>
+            {filteredContacts.map((contact, index) => (
+              <ContactListItem
+                key={'id' + index} //{contact.id}
+                contact={contact}
+                action={handledeleteContact}
+              />
+            ))}
+          </ul>
+        </div>
       );
     }
   }

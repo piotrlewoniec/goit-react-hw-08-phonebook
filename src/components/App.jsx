@@ -1,6 +1,8 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import css from './App.module.css';
+import { Navigation } from './navigation/Navigation';
 import { ContactForm } from './contactform/ContactForm';
 import { Filter } from './filter/Filter';
 import { ContactList } from './contactlist/ContactList';
@@ -20,18 +22,30 @@ export const App = () => {
   }, []);
 
   return (
-    <div className={css.app_wrapper}>
-      <div className={css.app_holder}>
-        <h1 className={css.app_title}>Phonebook</h1>
-        <ContactList />
+    <>
+      <Routes>
+        <Route path="/" element={<Navigation />}>
+          {/* <Route index element={<Contacts />} />
+          <Route path="movies/:movieId" element={<MovieDetails />}>
+            <Route path="cast" element={<Cast />} />
+            <Route path="reviews" element={<Reviews />} />
+          </Route>
+          <Route path="movies" element={<Movies />} />
+          <Route path="*" element={<Home />} /> */}
+        </Route>
+      </Routes>
+      <div className={css.app_wrapper}>
+        <div>
+          <ContactList />
+        </div>
+        <div className={css.app_actionpanel}>
+          <Filter />
+          <ContactForm />
+        </div>
         {isLoading && <Loader name="RotatingLines" />}
         {error && <p>Communication error. {error}</p>}
       </div>
-      <div className={css.app_actionpanel}>
-        <Filter />
-        <ContactForm />
-      </div>
-    </div>
+    </>
   );
 };
 
