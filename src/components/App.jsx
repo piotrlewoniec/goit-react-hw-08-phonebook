@@ -7,6 +7,8 @@ import { ContactForm } from './contactform/ContactForm';
 import { Filter } from './filter/Filter';
 import { ContactList } from './contactlist/ContactList';
 import { Loader } from './loader/Loader';
+import { Contacts } from 'pages/contacts/Contacts';
+import { Register } from 'pages/register/Register';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { selectServerData } from 'redux/selectors';
@@ -25,26 +27,18 @@ export const App = () => {
     <>
       <Routes>
         <Route path="/" element={<Navigation />}>
-          {/* <Route index element={<Contacts />} />
-          <Route path="movies/:movieId" element={<MovieDetails />}>
+          <Route index element={<Contacts />} />
+          <Route path="register" element={<Register />} />
+          {/*<Route path="movies/:movieId" element={<MovieDetails />}>
             <Route path="cast" element={<Cast />} />
             <Route path="reviews" element={<Reviews />} />
           </Route>
-          <Route path="movies" element={<Movies />} />
-          <Route path="*" element={<Home />} /> */}
+          <Route path="movies" element={<Movies />} />*/}
+          <Route path="*" element={<Contacts />} />
         </Route>
       </Routes>
-      <div className={css.app_wrapper}>
-        <div>
-          <ContactList />
-        </div>
-        <div className={css.app_actionpanel}>
-          <Filter />
-          <ContactForm />
-        </div>
-        {isLoading && <Loader name="RotatingLines" />}
-        {error && <p>Communication error. {error}</p>}
-      </div>
+      {isLoading && <Loader name="RotatingLines" />}
+      {error && <p>Communication error. {error}</p>}
     </>
   );
 };

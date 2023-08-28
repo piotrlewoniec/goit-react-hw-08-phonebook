@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
+  font-size: 40px;
+  color: #010101;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.actionpanel {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 30px;
+}
