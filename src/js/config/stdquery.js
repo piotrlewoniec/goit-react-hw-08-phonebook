@@ -23,3 +23,15 @@ export const paramsDefault = {
   page: 1,
   limit: 10,
 };
+
+//https://connections-api.herokuapp.com/docs/
+
+export const headerDeafultURLHeroKuapp = {
+  baseURL: `https://connections-api.herokuapp.com/`,
+};
+
+export const headerDefaultRegister = {
+  method: 'post',
+  accept: 'application/json',
+  url: '/users/signup',
+};
