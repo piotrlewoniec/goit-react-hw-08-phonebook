@@ -55,7 +55,7 @@ export const ContactList = () => {
       );
       return (
         <div className={css.wrapper}>
-          <h1 className={css.app_title}>Phonebook</h1>
+          <h1 className={css.title}>Phonebook</h1>
           <ul className={css.holder}>
             {filteredContacts.map((contact, index) => (
               <ContactListItem

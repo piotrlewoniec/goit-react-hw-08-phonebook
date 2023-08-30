@@ -13,6 +13,7 @@ import { Register } from 'pages/register/Register';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectServerData } from 'redux/selectors';
 import { getContacts } from 'redux/contacts/operations';
+import { Login } from 'pages/login/Login';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ export const App = () => {
         <Route path="/" element={<Navigation />}>
           <Route index element={<Contacts />} />
           <Route path="register" element={<Register />} />
+          <Route path="login" element={<Login />} />
           {/*<Route path="movies/:movieId" element={<MovieDetails />}>
             <Route path="cast" element={<Cast />} />
             <Route path="reviews" element={<Reviews />} />
@@ -44,38 +46,8 @@ export const App = () => {
 };
 
 // Komponenty:
-// logowanie
-// rejestracja
-// konto uzytkownika
-// Nawigacja
-
-// Strony:
-// Glowna
-
-// Książka kontaktów
 
 // Back-end
-
-// Trasowanie
-// Dodaj trasowanie z biblioteką React Router. W aplikacji powinno być kilka stron:
-
-// /register - publiczna trasa rejestracji nowego użytkownika z formularzem
-// /login - publiczna trasa logowania istniejącego użytkownika z formularzem
-// /contacts - prywatna trasa do pracy z listą kontaktów użytkownika
-// Dodaj komponent nawigacji Navigation z odnośnikami do przechodzenia po trasach.
-
-// Menu użytkownika
-// Utwórz komponent UserMenu, wyświetlający pocztę użytkownika i przycisk wyjścia z konta. Jego układ może wyglądać następująco:
-
-// <div>
-//   <p>mango@mail.com</p>
-//   <button>Logout</button>
-// </div>
-
-// Stylizacja
-// To finalna wersja aplikacji, dlatego popracuj nad szatą graficzną interfejsu. Można wykorzystać bibliotekę stylizacji lub komponentów, na przykład Chakra UI lub Material UI.
-// https://chakra-ui.com/
-// https://mui.com/
 
 //----------------------------------------------------------------------------------
 

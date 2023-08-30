@@ -1,31 +1,17 @@
-import css from './Register.module.css';
+import css from './Login.module.css';
 import { Button } from 'components/button/Button';
 
-export const Register = () => {
+export const Login = () => {
   return (
     <div className={css.formview}>
-      <h3 className={css.form_title}>Register</h3>
+      <h3 className={css.form_title}>Login</h3>
       <form
-        name="registerform"
+        name="loginform"
         autoComplete="on"
         method="POST"
         validate="true"
         onSubmit={0}
       >
-        <label className={css.inputlabel}>
-          Username
-          <input
-            className={css.inputfield}
-            type="text"
-            name="username"
-            minLength="2"
-            maxLength="50"
-            autoComplete="name"
-            placeholder=" "
-            title="Input user name"
-            required
-          />
-        </label>
         <label className={css.inputlabel}>
           E-mail
           <input
@@ -54,22 +40,7 @@ export const Register = () => {
             required
           />
         </label>
-        <label className={css.inputlabel}>
-          Repeat password
-          <input
-            className={css.inputfield}
-            type="password"
-            name="repwd"
-            minlength="8"
-            maxLength="30"
-            autoComplete="off"
-            placeholder=" "
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).8,}"
-            title="Password must contain at least 8 characters, including UPPER/lowercase and numbers."
-            required
-          />
-        </label>
-        <Button label="Register" formButton={true} />
+        <Button label="Login" formButton={true} />
       </form>
     </div>
   );

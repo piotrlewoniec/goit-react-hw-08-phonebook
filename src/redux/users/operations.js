@@ -1,3 +1,20 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { axiosData } from 'js/apireset/axios-data';
+
+export const getContacts = createAsyncThunk(
+  'user/register',
+  async (credentials, thunkAPI) => {
+    try {
+      const header = { ...headerDefaultGet, ...headerDeafultURL };
+      header.url = '/contacts';
+      const response = await axiosData({ header: header });
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
 const handleApi = async evt => {
   console.log('get user current');
 

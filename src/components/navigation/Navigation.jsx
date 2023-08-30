@@ -1,5 +1,6 @@
 import { Outlet, NavLink } from 'react-router-dom';
 import { Suspense } from 'react';
+import { UserMenu } from 'components/usermenu/UserMenu';
 import css from './Navigation.module.css';
 
 export const Navigation = () => {
@@ -11,10 +12,13 @@ export const Navigation = () => {
           <NavLink to="register">Register</NavLink>
           <NavLink to="login">Login</NavLink>
         </nav>
+        <UserMenu />
       </header>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Outlet />
-      </Suspense>
+      <main className={css.outpadds}>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Outlet />
+        </Suspense>
+      </main>
     </>
   );
 };
