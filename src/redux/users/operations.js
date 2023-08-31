@@ -3,7 +3,13 @@ import { axiosData } from 'js/apireset/axios-data';
 import {
   headerDeafultURLHeroKuapp,
   headerDefaultRegister,
+  headerDeafulLogin,
+  headerDeafulLogout,
+  headerDeafulUserInfo,
 } from 'js/config/stdquery';
+
+const tokenlogin =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGVmOWNjNmQzYjNiYTAwMTQ5OWJjZDAiLCJpYXQiOjE2OTM0NjQwNTZ9.Caho8evIy6EW2f_4qSpXj-Zxn3enww6of9znVCQQ5EE';
 
 export const register = createAsyncThunk(
   'user/register',
@@ -11,6 +17,68 @@ export const register = createAsyncThunk(
     try {
       const header = { ...headerDefaultRegister, ...headerDeafultURLHeroKuapp };
       const response = await axiosData({ header: header, data: credentials });
+      return response.data;
+      //response. ---->
+      // status: 201
+      // statusText: "Created"
+      // status: 400
+      // statusText: "Bad Request"
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const login = createAsyncThunk(
+  'user/login',
+  async (credentials, thunkAPI) => {
+    try {
+      const header = { ...headerDeafulLogin, ...headerDeafultURLHeroKuapp };
+      const response = await axiosData({ header: header, data: credentials });
+      console.log(response);
+      return response.data;
+      //response. ---->
+      // status: 200
+      // statusText: "OK"
+      // status: 400
+      // statusText: "Bad Request"
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const logout = createAsyncThunk('user/logout', async (_, thunkAPI) => {
+  try {
+    const header = {
+      ...headerDeafulLogout,
+      ...headerDeafultURLHeroKuapp,
+      headers: { Authorization: `Bearer ${tokenlogin}` },
+    };
+    const response = await axiosData({ header: header });
+    console.log(response);
+    return response.data;
+    //response. ---->
+    // status: 200
+    // statusText: "OK"
+    //response.response ---->
+    // status: 401
+    // statusText: "Unauthorized"
+  } catch (e) {
+    return thunkAPI.rejectWithValue(e.message);
+  }
+});
+
+export const userinfo = createAsyncThunk(
+  'user/userinfo',
+  async (_, thunkAPI) => {
+    try {
+      const header = {
+        ...headerDeafulUserInfo,
+        ...headerDeafultURLHeroKuapp,
+        headers: { Authorization: `Bearer ${tokenlogin}` },
+      };
+      const response = await axiosData({ header: header });
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -21,53 +89,53 @@ export const register = createAsyncThunk(
 const handleApi = async evt => {
   console.log('get user current');
 
-  const tokenregister =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQ0YjNmN2U0NDIyZjAwMTQ5YjE3NWMiLCJpYXQiOjE2OTE2NjEzMDN9.FHKP0AhRxi8n1mzAKlltTGKkVgoTQkz5RQRnn2Ki8_g';
+  // const tokenregister =
+  //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQ0YjNmN2U0NDIyZjAwMTQ5YjE3NWMiLCJpYXQiOjE2OTE2NjEzMDN9.FHKP0AhRxi8n1mzAKlltTGKkVgoTQkz5RQRnn2Ki8_g';
 
-  const tokenlogin =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQ0YjNmN2U0NDIyZjAwMTQ5YjE3NWMiLCJpYXQiOjE2OTE2ODc5MDN9.pId5UvuPe1u8BM2yc3acqO1dhZ601nx0D9wxdxXEo2w';
+  // const tokenlogin =
+  //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQ0YjNmN2U0NDIyZjAwMTQ5YjE3NWMiLCJpYXQiOjE2OTE2ODc5MDN9.pId5UvuPe1u8BM2yc3acqO1dhZ601nx0D9wxdxXEo2w';
 
-  const header1 = {
-    method: 'post',
-    accept: 'application/json',
-    baseURL: 'https://connections-api.herokuapp.com/users/signup',
-  };
+  // const header1 = {
+  //   method: 'post',
+  //   accept: 'application/json',
+  //   baseURL: 'https://connections-api.herokuapp.com/users/signup',
+  // };
 
-  const header2 = {
-    method: 'post',
-    accept: 'application/json',
-    baseURL: 'https://connections-api.herokuapp.com/users/login',
-  };
+  // const header2 = {
+  //   method: 'post',
+  //   accept: 'application/json',
+  //   baseURL: 'https://connections-api.herokuapp.com/users/login',
+  // };
 
-  const header3 = {
-    method: 'get',
-    accept: 'application/json',
-    baseURL: 'https://connections-api.herokuapp.com/',
-    url: '/users/current',
-    headers: { Authorization: `Bearer ${tokenlogin}` },
-  };
+  // const header3 = {
+  //   method: 'get',
+  //   accept: 'application/json',
+  //   baseURL: 'https://connections-api.herokuapp.com/',
+  //   url: '/users/current',
+  //   headers: { Authorization: `Bearer ${tokenlogin}` },
+  // };
 
-  const header4 = {
-    method: 'post',
-    accept: 'application/json',
-    baseURL: 'https://connections-api.herokuapp.com/',
-    url: '/users/logout',
-    headers: { Authorization: `Bearer ${tokenlogin}` },
-  };
+  // const header4 = {
+  //   method: 'post',
+  //   accept: 'application/json',
+  //   baseURL: 'https://connections-api.herokuapp.com/',
+  //   url: '/users/logout',
+  //   headers: { Authorization: `Bearer ${tokenlogin}` },
+  // };
 
-  axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
+  // axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
   // axios.defaults.headers.common.Authorization = `Bearer ${tokenlogin}`;
 
-  const auth1 = {
-    name: 'Testas Crosese',
-    email: 'testoftest@test.pl',
-    password: 'examplepwd123452312313123123',
-  };
+  // const auth1 = {
+  //   name: 'Testas Crosese',
+  //   email: 'testoftest@test.pl',
+  //   password: 'examplepwd123452312313123123',
+  // };
 
-  const auth2 = {
-    email: 'testoftest@test.pl',
-    password: 'examplepwd123452312313123123',
-  };
+  // const auth2 = {
+  //   email: 'testoftest@test.pl',
+  //   password: 'examplepwd123452312313123123',
+  // };
 
   //register
   // const response = await axiosData({

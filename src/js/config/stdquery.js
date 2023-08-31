@@ -35,3 +35,21 @@ export const headerDefaultRegister = {
   accept: 'application/json',
   url: '/users/signup',
 };
+
+export const headerDeafulLogin = {
+  method: 'post',
+  accept: 'application/json',
+  url: '/users/login',
+};
+
+export const headerDeafulLogout = {
+  method: 'post',
+  accept: 'application/json',
+  url: '/users/logout',
+};
+
+export const headerDeafulUserInfo = {
+  method: 'get',
+  accept: 'application/json',
+  url: '/users/current',
+};
