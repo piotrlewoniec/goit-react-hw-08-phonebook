@@ -86,6 +86,10 @@ export const userinfo = createAsyncThunk(
   }
 );
 
+// testo
+// test123@gmail.pl
+// kukels123
+
 const handleApi = async evt => {
   console.log('get user current');
 
