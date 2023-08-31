@@ -48,7 +48,22 @@ const userSlice = createSlice({
         state.token = null;
         state.isLoggedIn = false;
       })
-      .addCase(logout.rejected, handleRejected);
+      .addCase(logout.rejected, handleRejected)
+      .addCase(userinfo.pending, (state, action) => {
+        state.isLoading = true;
+        state.isRefreshing = true;
+      })
+      .addCase(userinfo.fulfilled, (state, action) => {
+        state.error = null;
+        state.user = action.payload;
+        state.isLoggedIn = true;
+        state.isLoading = false;
+        state.isRefreshing = false;
+      })
+      .addCase(userinfo.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isRefreshing = false;
+      });
   },
 });
 

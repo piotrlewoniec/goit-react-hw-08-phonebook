@@ -9,7 +9,7 @@ import {
 } from 'js/config/stdquery';
 
 const tokenlogin =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGVmOWNjNmQzYjNiYTAwMTQ5OWJjZDAiLCJpYXQiOjE2OTM0NjQwNTZ9.Caho8evIy6EW2f_4qSpXj-Zxn3enww6of9znVCQQ5EE';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGVmOWNjNmQzYjNiYTAwMTQ5OWJjZDAiLCJpYXQiOjE2OTM0Nzc0NzJ9.wHnxq1fTbuJ5gS_2XPoMEF3_kzaK-nE7VAPrxxbV37U';
 
 export const register = createAsyncThunk(
   'user/register',
@@ -79,7 +79,14 @@ export const userinfo = createAsyncThunk(
         headers: { Authorization: `Bearer ${tokenlogin}` },
       };
       const response = await axiosData({ header: header });
+      console.log(response);
       return response.data;
+      //response. ---->
+      // status: 200
+      // statusText: "OK"
+      //response.response ---->
+      // status: 401
+      // statusText: "Unauthorized"
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }

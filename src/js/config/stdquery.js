@@ -53,3 +53,27 @@ export const headerDeafulUserInfo = {
   accept: 'application/json',
   url: '/users/current',
 };
+
+export const headerDeafulDownload = {
+  method: 'get',
+  accept: 'application/json',
+  url: '/contacts',
+};
+
+export const headerDeafulUpload = {
+  method: 'post',
+  accept: 'application/json',
+  url: '/contacts',
+};
+
+export const headerDeafulDelete = {
+  method: 'delete',
+  accept: 'application/json',
+  url: '/contacts',
+};
+
+export const headerDefaultUpdate = {
+  method: 'patch',
+  accept: 'application/json',
+  url: '/contacts',
+};

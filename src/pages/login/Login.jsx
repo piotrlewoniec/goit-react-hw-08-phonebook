@@ -2,7 +2,12 @@ import css from './Login.module.css';
 import { Button } from 'components/button/Button';
 import Notiflix from 'notiflix';
 import { useDispatch } from 'react-redux';
-import { login } from 'redux/users/operations';
+import { login, userinfo } from 'redux/users/operations';
+import {
+  deleteContact,
+  downloadContacts,
+  uploadContact,
+} from 'redux/contacts/operations';
 
 export const Login = () => {
   const dispatch = useDispatch();
@@ -56,8 +61,7 @@ export const Login = () => {
             className={css.inputfield}
             type="password"
             name="pwd"
-            minlength="8"
-            maxLength="30"
+            minLength="8"
             autoComplete="off"
             placeholder=" "
             // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).8,}"
@@ -66,6 +70,18 @@ export const Login = () => {
           />
         </label>
         <Button label="Login" formButton={true} />
+        <button
+          type="button"
+          onClick={() => {
+            dispatch(downloadContacts());
+            // dispatch(
+            //   uploadContact({ name: 'Dzon Don', number: '312312 32112 312' })
+            // );
+            // dispatch(deleteContact('64f09becd3b3ba001499bdcf'));
+          }}
+        >
+          Info
+        </button>
       </form>
     </div>
   );

@@ -1,5 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getContacts, createContact, removeContact } from './operations';
+import {
+  getContacts,
+  createContact,
+  removeContact,
+  downloadContacts,
+  uploadContact,
+  deleteContact,
+  updateContact,
+} from './operations';
 import Notiflix from 'notiflix';
 
 const handlePending = state => {
@@ -59,7 +67,62 @@ const fetchContactsSlice = createSlice({
           }
         }
       })
-      .addCase(removeContact.rejected, handleRejected);
+      .addCase(removeContact.rejected, handleRejected)
+
+      .addCase(downloadContacts.pending, handlePending)
+      .addCase(downloadContacts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        if (action.payload) {
+          state.data = action.payload;
+        } else {
+          state.data = [];
+        }
+      })
+      .addCase(downloadContacts.rejected, handleRejected)
+
+      .addCase(uploadContact.pending, handlePending)
+      .addCase(uploadContact.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        if (action.payload) {
+          Notiflix.Notify.success('Adding new contact');
+          state.data.push(action.payload);
+        }
+      })
+      .addCase(uploadContact.rejected, handleRejected)
+
+      .addCase(deleteContact.pending, handlePending)
+      .addCase(deleteContact.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        if (action.payload) {
+          Notiflix.Notify.failure('Deleting contact');
+          const index = state.data.findIndex(
+            element => element.id === action.payload.id
+          );
+          if (index > -1) {
+            state.data.splice(index, 1);
+          }
+        }
+      })
+      .addCase(deleteContact.rejected, handleRejected)
+
+      .addCase(updateContact.pending, handlePending)
+      .addCase(updateContact.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        if (action.payload) {
+          Notiflix.Notify.info('Updating contact');
+          const index = state.data.findIndex(
+            element => element.id === action.payload.id
+          );
+          if (index > -1) {
+            state.data[index] = action.payload;
+          }
+        }
+      })
+      .addCase(updateContact.rejected, handleRejected);
 
     // [getContacts.pending](state) {
     //   state.isLoading = true;
