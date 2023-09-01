@@ -9,8 +9,20 @@ import {
   uploadContact,
 } from 'redux/contacts/operations';
 
+import { useSelector } from 'react-redux';
+
+import { selectUser } from 'redux/selectors';
+import { selectToken } from 'redux/selectors';
+import { selectIsLoggedIn } from 'redux/selectors';
+import { selectIsRefreshing } from 'redux/selectors';
+
 export const Login = () => {
   const dispatch = useDispatch();
+
+  const user = useSelector(selectUser);
+  const token = useSelector(selectToken);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isRefreshing = useSelector(selectIsRefreshing);
 
   const handleLogin = evt => {
     evt.preventDefault();
@@ -34,7 +46,9 @@ export const Login = () => {
 
   return (
     <div className={css.formview}>
-      <h3 className={css.form_title}>Login</h3>
+      <h3 className={css.form_title}>
+        Login to <span className={css.logotext}>Phone</span>book
+      </h3>
       <form
         name="loginform"
         autoComplete="on"
@@ -78,6 +92,10 @@ export const Login = () => {
             //   uploadContact({ name: 'Dzon Don', number: '312312 32112 312' })
             // );
             // dispatch(deleteContact('64f09becd3b3ba001499bdcf'));
+            console.log(user);
+            console.log(token);
+            console.log(isLoggedIn);
+            console.log(isRefreshing);
           }}
         >
           Info

@@ -63,3 +63,7 @@
 .inputfield:not(:placeholder-shown):required:invalid {
   border-color: var(--errors-color);
 }
+
+.logotext {
+  color: #2196f3;
+}

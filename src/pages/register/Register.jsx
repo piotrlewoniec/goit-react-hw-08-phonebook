@@ -37,7 +37,9 @@ export const Register = () => {
 
   return (
     <div className={css.formview}>
-      <h3 className={css.form_title}>Register</h3>
+      <h3 className={css.form_title}>
+        Register to <span className={css.logotext}>Phone</span>book
+      </h3>
       <form
         name="registerform"
         autoComplete="on"

@@ -1,19 +1,35 @@
 import css from './UserMenu.module.css';
 import { Button } from '../button/Button';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from 'redux/users/operations';
+import { selectUser, selectIsLoggedIn } from 'redux/selectors';
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const handleLogout = () => {
     dispatch(logout());
   };
 
-  return (
-    <div className={css.wrapper}>
-      <p className={css.email}>mango@mail.com</p>
-      <Button label="Logout" formButton={false} action={handleLogout} />
-    </div>
-  );
+  if (isLoggedIn) {
+    return (
+      <div className={css.wrapper}>
+        <p className={css.elements}>
+          {user.name === null ? 'unknown' : `${user.name}`}
+        </p>
+        <p className={css.elements}>
+          {user.email === null ? 'unknown' : `${user.email}`}
+        </p>
+        <Button label="Logout" formButton={false} action={handleLogout} />
+      </div>
+    );
+  } else {
+    return (
+      <div className={css.wrapper}>
+        <p className={css.email}>Please login</p>
+      </div>
+    );
+  }
 };

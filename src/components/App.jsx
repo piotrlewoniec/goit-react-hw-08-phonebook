@@ -9,6 +9,7 @@ import { ContactList } from './contactlist/ContactList';
 import { Loader } from './loader/Loader';
 import { Contacts } from 'pages/contacts/Contacts';
 import { Register } from 'pages/register/Register';
+import { Home } from 'pages/home/Home';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { selectServerData } from 'redux/selectors';
@@ -28,7 +29,8 @@ export const App = () => {
     <>
       <Routes>
         <Route path="/" element={<Navigation />}>
-          <Route index element={<Contacts />} />
+          <Route index element={<Home />} />
+          <Route path="contacts" element={<Contacts />} />
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
           {/*<Route path="movies/:movieId" element={<MovieDetails />}>
@@ -36,7 +38,7 @@ export const App = () => {
             <Route path="reviews" element={<Reviews />} />
           </Route>
           <Route path="movies" element={<Movies />} />*/}
-          <Route path="*" element={<Contacts />} />
+          <Route path="*" element={<Home />} />
         </Route>
       </Routes>
       {isLoading && <Loader name="RotatingLines" />}
