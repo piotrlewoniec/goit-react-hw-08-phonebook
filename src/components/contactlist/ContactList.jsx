@@ -1,11 +1,11 @@
 // import PropTypes from 'prop-types';
 import css from './ContactList.module.css';
-import { Button } from '../button/Button';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { selectFilter, selectServerContacts } from 'redux/selectors';
-
 import { deleteContact } from 'redux/contacts/operations';
+
+import { Button } from '../button/Button';
 
 const ContactListItem = ({ contact, action }) => (
   <li className={css.item}>
@@ -37,7 +37,7 @@ export const ContactList = () => {
     if (filter === '') {
       return (
         <div className={css.wrapper}>
-          <h1 className={css.title}>Phonebook</h1>
+          <h1 className={css.title}>Contacts</h1>
           <ul className={css.holder}>
             {serverContacts.map((contact, index) => (
               <ContactListItem
@@ -55,7 +55,7 @@ export const ContactList = () => {
       );
       return (
         <div className={css.wrapper}>
-          <h1 className={css.title}>Phonebook</h1>
+          <h1 className={css.title}>Contacts</h1>
           <ul className={css.holder}>
             {filteredContacts.map((contact, index) => (
               <ContactListItem

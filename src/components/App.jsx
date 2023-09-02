@@ -1,20 +1,21 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useEffect, lazy } from 'react';
-import css from './App.module.css';
-import { Navigation } from './navigation/Navigation';
-import { ContactForm } from './contactform/ContactForm';
-import { Filter } from './filter/Filter';
-import { ContactList } from './contactlist/ContactList';
-import { Loader } from './loader/Loader';
-// import { Contacts } from 'pages/contacts/Contacts';
-// import { Register } from 'pages/register/Register';
-// import { Home } from 'pages/home/Home';
-
 import { useSelector, useDispatch } from 'react-redux';
-import { selectServerData, selectIsRefreshing } from 'redux/selectors';
-// import { Login } from 'pages/login/Login';
+import {
+  selectServerData,
+  selectIsRefreshing,
+  selectIsLoggedIn,
+} from 'redux/selectors';
+
 import { userinfo } from 'redux/users/operations';
+
+import { Loader } from './loader/Loader';
+import { Navigation } from './navigation/Navigation';
+// import { Home } from 'pages/home/Home';
+// import { Register } from 'pages/register/Register';
+// import { Login } from 'pages/login/Login';
+// import { Contacts } from 'pages/contacts/Contacts';
 
 const Home = lazy(() => import('pages/home/Home'));
 const Register = lazy(() => import('pages/register/Register'));
@@ -22,14 +23,21 @@ const Login = lazy(() => import('pages/login/Login'));
 const Contacts = lazy(() => import('pages/contacts/Contacts'));
 
 export const App = () => {
+  const navigate = useNavigate();
   const { isLoading, error } = useSelector(selectServerData);
   const isRefreshing = useSelector(selectIsRefreshing);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(userinfo());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    navigate('/', { replace: false });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedIn]);
 
   return isRefreshing ? (
     <b>Refreshing user...</b>
@@ -38,14 +46,9 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Navigation />}>
           <Route index element={<Home />} />
-          <Route path="contacts" element={<Contacts />} />
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
-          {/*<Route path="movies/:movieId" element={<MovieDetails />}>
-            <Route path="cast" element={<Cast />} />
-            <Route path="reviews" element={<Reviews />} />
-          </Route>
-          <Route path="movies" element={<Movies />} />*/}
+          <Route path="contacts" element={<Contacts />} />
           <Route path="*" element={<Home />} />
         </Route>
       </Routes>

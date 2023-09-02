@@ -1,8 +1,10 @@
 import css from './UserMenu.module.css';
-import { Button } from '../button/Button';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from 'redux/users/operations';
 import { selectUser, selectIsLoggedIn } from 'redux/selectors';
+
+import { Button } from '../button/Button';
 
 export const UserMenu = () => {
   const dispatch = useDispatch();

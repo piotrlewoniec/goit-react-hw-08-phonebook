@@ -12,7 +12,6 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import { contactsReducer } from './contacts/contactsslice';
 import filterReducer from './filter/searchfilterslice';
 import { fetchReducer } from './contacts/fetchcontactslice';
 import { userReducer } from './users/usersslice';
@@ -25,7 +24,6 @@ const authPersistConfig = {
 
 export const store = configureStore({
   reducer: {
-    contacts: contactsReducer,
     filter: filterReducer,
     server: fetchReducer,
     user: persistReducer(authPersistConfig, userReducer),

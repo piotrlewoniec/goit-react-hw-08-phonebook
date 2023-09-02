@@ -1,9 +1,12 @@
+import css from './Navigation.module.css';
+
 import { Outlet, NavLink } from 'react-router-dom';
 import { Suspense } from 'react';
-import { UserMenu } from 'components/usermenu/UserMenu';
-import css from './Navigation.module.css';
+
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from 'redux/selectors';
+
+import { UserMenu } from 'components/usermenu/UserMenu';
 
 export const Navigation = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);

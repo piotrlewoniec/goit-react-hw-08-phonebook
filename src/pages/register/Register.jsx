@@ -1,8 +1,10 @@
 import css from './Register.module.css';
-import { Button } from 'components/button/Button';
-import Notiflix from 'notiflix';
+
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/users/operations';
+
+import { Button } from 'components/button/Button';
+import Notiflix from 'notiflix';
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -31,7 +33,6 @@ const Register = () => {
     //   Notiflix.Notify.failure('Correct inputed data');
     //   return;
     // }
-    console.log({ name: username, email: email, password: pwd });
     dispatch(register({ name: username, email: email, password: pwd }));
   };
 

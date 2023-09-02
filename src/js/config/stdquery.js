@@ -15,7 +15,7 @@ export const headerDefaultDelete = {
   'content-type': 'application/json',
 };
 
-export const headerDeafultURL = {
+export const headerDefaultURL = {
   baseURL: `https://${apikeyMOCKAPI}.mockapi.io/api/pml/v1/`,
 };
 
@@ -26,7 +26,7 @@ export const paramsDefault = {
 
 //https://connections-api.herokuapp.com/docs/
 
-export const headerDeafultURLHeroKuapp = {
+export const headerDefaultURLHeroKuapp = {
   baseURL: `https://connections-api.herokuapp.com/`,
 };
 
@@ -36,37 +36,37 @@ export const headerDefaultRegister = {
   url: '/users/signup',
 };
 
-export const headerDeafulLogin = {
+export const headerDefaultLogin = {
   method: 'post',
   accept: 'application/json',
   url: '/users/login',
 };
 
-export const headerDeafulLogout = {
+export const headerDefaultLogout = {
   method: 'post',
   accept: 'application/json',
   url: '/users/logout',
 };
 
-export const headerDeafulUserInfo = {
+export const headerDefaulUserInfo = {
   method: 'get',
   accept: 'application/json',
   url: '/users/current',
 };
 
-export const headerDeafulDownload = {
+export const headerDefaultDownload = {
   method: 'get',
   accept: 'application/json',
   url: '/contacts',
 };
 
-export const headerDeafulUpload = {
+export const headerDefaultUpload = {
   method: 'post',
   accept: 'application/json',
   url: '/contacts',
 };
 
-export const headerDeafulDelete = {
+export const headerDefaultRemove = {
   method: 'delete',
   accept: 'application/json',
   url: '/contacts',

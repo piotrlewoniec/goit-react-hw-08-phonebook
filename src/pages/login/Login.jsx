@@ -1,28 +1,14 @@
 import css from './Login.module.css';
-import { Button } from 'components/button/Button';
-import Notiflix from 'notiflix';
+
 import { useDispatch } from 'react-redux';
-import { login, userinfo } from 'redux/users/operations';
-import {
-  deleteContact,
-  downloadContacts,
-  uploadContact,
-} from 'redux/contacts/operations';
+import { login } from 'redux/users/operations';
 
-import { useSelector } from 'react-redux';
+import { Button } from 'components/button/Button';
 
-import { selectUser } from 'redux/selectors';
-import { selectToken } from 'redux/selectors';
-import { selectIsLoggedIn } from 'redux/selectors';
-import { selectIsRefreshing } from 'redux/selectors';
+import Notiflix from 'notiflix';
 
 const Login = () => {
   const dispatch = useDispatch();
-
-  const user = useSelector(selectUser);
-  const token = useSelector(selectToken);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  const isRefreshing = useSelector(selectIsRefreshing);
 
   const handleLogin = evt => {
     evt.preventDefault();
@@ -84,22 +70,6 @@ const Login = () => {
           />
         </label>
         <Button label="Login" formButton={true} />
-        <button
-          type="button"
-          onClick={() => {
-            dispatch(downloadContacts());
-            // dispatch(
-            //   uploadContact({ name: 'Dzon Don', number: '312312 32112 312' })
-            // );
-            // dispatch(deleteContact('64f09becd3b3ba001499bdcf'));
-            console.log(user);
-            console.log(token);
-            console.log(isLoggedIn);
-            console.log(isRefreshing);
-          }}
-        >
-          Info
-        </button>
       </form>
     </div>
   );
