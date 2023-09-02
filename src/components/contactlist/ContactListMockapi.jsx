@@ -5,7 +5,7 @@ import { Button } from '../button/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectFilter, selectServerContacts } from 'redux/selectors';
 
-import { deleteContact } from 'redux/contacts/operations';
+import { removeContact } from 'redux/contacts/operations';
 
 const ContactListItem = ({ contact, action }) => (
   <li className={css.item}>
@@ -28,7 +28,7 @@ export const ContactList = () => {
   const handledeleteContact = evt => {
     evt.preventDefault();
     const id = evt.target.dataset.id;
-    dispatch(deleteContact(id));
+    dispatch(removeContact(id));
   };
 
   if (serverContacts.length === 0) {

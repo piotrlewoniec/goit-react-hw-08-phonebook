@@ -16,7 +16,7 @@ import { selectToken } from 'redux/selectors';
 import { selectIsLoggedIn } from 'redux/selectors';
 import { selectIsRefreshing } from 'redux/selectors';
 
-export const Login = () => {
+const Login = () => {
   const dispatch = useDispatch();
 
   const user = useSelector(selectUser);
@@ -104,3 +104,5 @@ export const Login = () => {
     </div>
   );
 };
+
+export default Login;

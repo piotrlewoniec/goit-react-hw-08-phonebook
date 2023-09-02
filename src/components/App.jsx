@@ -1,31 +1,39 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, lazy } from 'react';
 import css from './App.module.css';
 import { Navigation } from './navigation/Navigation';
 import { ContactForm } from './contactform/ContactForm';
 import { Filter } from './filter/Filter';
 import { ContactList } from './contactlist/ContactList';
 import { Loader } from './loader/Loader';
-import { Contacts } from 'pages/contacts/Contacts';
-import { Register } from 'pages/register/Register';
-import { Home } from 'pages/home/Home';
+// import { Contacts } from 'pages/contacts/Contacts';
+// import { Register } from 'pages/register/Register';
+// import { Home } from 'pages/home/Home';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { selectServerData } from 'redux/selectors';
-import { getContacts } from 'redux/contacts/operations';
-import { Login } from 'pages/login/Login';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectServerData, selectIsRefreshing } from 'redux/selectors';
+// import { Login } from 'pages/login/Login';
+import { userinfo } from 'redux/users/operations';
+
+const Home = lazy(() => import('pages/home/Home'));
+const Register = lazy(() => import('pages/register/Register'));
+const Login = lazy(() => import('pages/login/Login'));
+const Contacts = lazy(() => import('pages/contacts/Contacts'));
 
 export const App = () => {
-  const dispatch = useDispatch();
   const { isLoading, error } = useSelector(selectServerData);
+  const isRefreshing = useSelector(selectIsRefreshing);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getContacts());
+    dispatch(userinfo());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
     <>
       <Routes>
         <Route path="/" element={<Navigation />}>
@@ -46,10 +54,6 @@ export const App = () => {
     </>
   );
 };
-
-// Komponenty:
-
-// Back-end
 
 //----------------------------------------------------------------------------------
 

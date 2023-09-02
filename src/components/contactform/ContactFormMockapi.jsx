@@ -5,7 +5,7 @@ import Notiflix from 'notiflix';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { selectServerContacts } from 'redux/selectors';
-import { uploadContact } from 'redux/contacts/operations';
+import { createContact } from 'redux/contacts/operations';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ export const ContactForm = () => {
       Notiflix.Notify.failure('Correct inputed data');
       return;
     }
-    dispatch(uploadContact({ name: name, number: number }));
+    dispatch(createContact({ name: name, number: number }));
     evt.target.reset();
   };
 

@@ -50,10 +50,15 @@ export const login = createAsyncThunk(
 
 export const logout = createAsyncThunk('user/logout', async (_, thunkAPI) => {
   try {
+    const state = thunkAPI.getState();
+    const token = state.user.token;
+    if (token === null) {
+      return thunkAPI.rejectWithValue('Not logged in');
+    }
     const header = {
       ...headerDeafulLogout,
       ...headerDeafultURLHeroKuapp,
-      headers: { Authorization: `Bearer ${tokenlogin}` },
+      headers: { Authorization: `Bearer ${token}` },
     };
     const response = await axiosData({ header: header });
     console.log(response);
@@ -73,10 +78,15 @@ export const userinfo = createAsyncThunk(
   'user/userinfo',
   async (_, thunkAPI) => {
     try {
+      const state = thunkAPI.getState();
+      const token = state.user.token;
+      if (token === null) {
+        return thunkAPI.rejectWithValue('Not logged in');
+      }
       const header = {
         ...headerDeafulUserInfo,
         ...headerDeafultURLHeroKuapp,
-        headers: { Authorization: `Bearer ${tokenlogin}` },
+        headers: { Authorization: `Bearer ${token}` },
       };
       const response = await axiosData({ header: header });
       console.log(response);

@@ -73,10 +73,15 @@ export const downloadContacts = createAsyncThunk(
   'fetchContacts/downloadContacts',
   async (_, thunkAPI) => {
     try {
+      const state = thunkAPI.getState();
+      const token = state.user.token;
+      if (token === null) {
+        return thunkAPI.rejectWithValue('Not logged in');
+      }
       const header = {
         ...headerDeafulDownload,
         ...headerDeafultURLHeroKuapp,
-        headers: { Authorization: `Bearer ${tokenlogin}` },
+        headers: { Authorization: `Bearer ${token}` },
       };
       const response = await axiosData({ header: header });
       console.log(response);
@@ -91,10 +96,15 @@ export const uploadContact = createAsyncThunk(
   'fetchContacts/uploadContact',
   async (newContact, thunkAPI) => {
     try {
+      const state = thunkAPI.getState();
+      const token = state.user.token;
+      if (token === null) {
+        return thunkAPI.rejectWithValue('Not logged in');
+      }
       const header = {
         ...headerDeafulUpload,
         ...headerDeafultURLHeroKuapp,
-        headers: { Authorization: `Bearer ${tokenlogin}` },
+        headers: { Authorization: `Bearer ${token}` },
       };
       console.log(newContact);
       // header.data = JSON.stringify(newContact);
@@ -119,10 +129,15 @@ export const deleteContact = createAsyncThunk(
   'fetchContacts/deleteContact',
   async (id, thunkAPI) => {
     try {
+      const state = thunkAPI.getState();
+      const token = state.user.token;
+      if (token === null) {
+        return thunkAPI.rejectWithValue('Not logged in');
+      }
       const header = {
         ...headerDeafulDelete,
         ...headerDeafultURLHeroKuapp,
-        headers: { Authorization: `Bearer ${tokenlogin}` },
+        headers: { Authorization: `Bearer ${token}` },
       };
       header.url = `/contacts/${id}`;
       const response = await axiosData({ header: header });
@@ -138,10 +153,15 @@ export const updateContact = createAsyncThunk(
   'fetchContacts/updateContact',
   async (data, thunkAPI) => {
     try {
+      const state = thunkAPI.getState();
+      const token = state.user.token;
+      if (token === null) {
+        return thunkAPI.rejectWithValue('Not logged in');
+      }
       const header = {
         ...headerDefaultUpdate,
         ...headerDeafultURLHeroKuapp,
-        headers: { Authorization: `Bearer ${tokenlogin}` },
+        headers: { Authorization: `Bearer ${token}` },
       };
       header.url = `/contacts/${data.id}`;
       const response = await axiosData({

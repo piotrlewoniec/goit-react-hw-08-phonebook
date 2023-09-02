@@ -4,7 +4,7 @@ import Notiflix from 'notiflix';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/users/operations';
 
-export const Register = () => {
+const Register = () => {
   const dispatch = useDispatch();
 
   const handleRegister = evt => {
@@ -107,3 +107,5 @@ export const Register = () => {
     </div>
   );
 };
+
+export default Register;
