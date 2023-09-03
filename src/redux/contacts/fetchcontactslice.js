@@ -23,11 +23,29 @@ const fetchContactsInitialState = {
   data: [],
   isLoading: false,
   error: null,
+  isEditing: false,
+  idEdit: '',
 };
 
 const fetchContactsSlice = createSlice({
   name: 'fetchContacts',
   initialState: fetchContactsInitialState,
+  reducers: {
+    setIsEditing: {
+      reducer(state, action) {
+        state.isEditing = action.payload.status;
+        state.idEdit = action.payload.id;
+      },
+      prepare({ id, status }) {
+        return {
+          payload: {
+            id,
+            status,
+          },
+        };
+      },
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(getContacts.pending, handlePending)
@@ -73,7 +91,7 @@ const fetchContactsSlice = createSlice({
       .addCase(downloadContacts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        if (action.payload) {
+        if (action.payload !== 'error') {
           state.data = action.payload;
         } else {
           state.data = [];
@@ -85,7 +103,7 @@ const fetchContactsSlice = createSlice({
       .addCase(uploadContact.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        if (action.payload) {
+        if (action.payload !== 'error') {
           Notiflix.Notify.success('Adding new contact');
           state.data.push(action.payload);
         }
@@ -96,7 +114,7 @@ const fetchContactsSlice = createSlice({
       .addCase(deleteContact.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        if (action.payload) {
+        if (action.payload !== 'error') {
           Notiflix.Notify.failure('Deleting contact');
           const index = state.data.findIndex(
             element => element.id === action.payload.id
@@ -112,7 +130,7 @@ const fetchContactsSlice = createSlice({
       .addCase(updateContact.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        if (action.payload) {
+        if (action.payload !== 'error') {
           Notiflix.Notify.info('Updating contact');
           const index = state.data.findIndex(
             element => element.id === action.payload.id
@@ -139,4 +157,5 @@ const fetchContactsSlice = createSlice({
   },
 });
 
+export const { setIsEditing } = fetchContactsSlice.actions;
 export const fetchReducer = fetchContactsSlice.reducer;

@@ -26,18 +26,22 @@ const userSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.user = action.payload.user;
-        state.token = action.payload.token;
-        state.isLoggedIn = true;
+        if (action.payload !== 'error') {
+          state.user = action.payload.user;
+          state.token = action.payload.token;
+          state.isLoggedIn = true;
+        }
       })
       .addCase(register.rejected, handleRejected)
       .addCase(login.pending, handlePending)
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.user = action.payload.user;
-        state.token = action.payload.token;
-        state.isLoggedIn = true;
+        if (action.payload !== 'error') {
+          state.user = action.payload.user;
+          state.token = action.payload.token;
+          state.isLoggedIn = true;
+        }
       })
       .addCase(login.rejected, handleRejected)
       .addCase(logout.pending, handlePending)
@@ -55,10 +59,12 @@ const userSlice = createSlice({
       })
       .addCase(userinfo.fulfilled, (state, action) => {
         state.error = null;
-        state.user = action.payload;
-        state.isLoggedIn = true;
-        state.isLoading = false;
         state.isRefreshing = false;
+        state.isLoading = false;
+        if (action.payload !== 'error') {
+          state.user = action.payload;
+          state.isLoggedIn = true;
+        }
       })
       .addCase(userinfo.rejected, (state, action) => {
         state.isLoading = false;

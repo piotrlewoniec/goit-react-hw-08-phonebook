@@ -71,7 +71,9 @@ export const downloadContacts = createAsyncThunk(
         headers: { Authorization: `Bearer ${token}` },
       };
       const response = await axiosData({ header: header });
-      return response.data;
+      if (response.status === 200) {
+        return response.data;
+      } else return 'error';
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -93,7 +95,9 @@ export const uploadContact = createAsyncThunk(
         headers: { Authorization: `Bearer ${token}` },
       };
       const response = await axiosData({ header: header, data: newContact });
-      return response.data;
+      if (response.status === 201) {
+        return response.data;
+      } else return 'error';
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -116,7 +120,9 @@ export const deleteContact = createAsyncThunk(
       };
       header.url = `/contacts/${id}`;
       const response = await axiosData({ header: header });
-      return response.data;
+      if (response.status === 200) {
+        return response.data;
+      } else return 'error';
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -142,8 +148,9 @@ export const updateContact = createAsyncThunk(
         header: header,
         data: data.newContactData,
       });
-      console.log(response);
-      return response.data;
+      if (response.status === 200) {
+        return response.data;
+      } else return 'error';
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
